@@ -1,4 +1,4 @@
-package com.vince.mercadolibre
+package com.vince.mercadolibre.scenes
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

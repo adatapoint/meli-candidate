@@ -27,12 +27,14 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             buildConfigField("String", "API_URL", "\"https://api.mercadolibre.com\"")
+            buildConfigField("String", "SITE_ID", "\"MLC\"")
         }
 
         debug {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             buildConfigField("String", "API_URL", "\"https://api.mercadolibre.com\"")
+            buildConfigField("String", "SITE_ID", "\"MLC\"")
         }
     }
     compileOptions {
@@ -51,6 +53,7 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.google.android.material:material:1.10.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation("androidx.multidex:multidex:2.0.1")
 
     // Network
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
