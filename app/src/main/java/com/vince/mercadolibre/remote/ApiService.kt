@@ -14,10 +14,16 @@ interface ApiService {
 
     // TODO
     @GET("/sites/$SITE_ID_COLOMBIA/search")
-    suspend fun getItems(@Query("q") query: String): Response<ItemsWithPagination<Item>>
+    suspend fun getItems(
+        @Query("q") query: String,
+        @Query("limit") limit: Int
+    ): Response<ItemsWithPagination<Item>>
 
     @GET("/sites/$SITE_ID_COLOMBIA/search")
-    suspend fun getItemsByCategory(@Query("category") categoryId: String): Response<ItemsWithPagination<Item>>
+    suspend fun getItemsByCategory(
+        @Query("category") categoryId: String,
+        @Query("limit") limit: Int
+    ): Response<ItemsWithPagination<Item>>
 
     @GET("/items?ids={id}")
     suspend fun getDetailedItem(@Path("id") id: String): Response<DetailedItem>

@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="no_items">Tu búsqueda no arrojó ningún resultado</string>
+    <string name="no_items_error">No logramos conectarnos, por favor intenta más tarde</string>
+</resources>

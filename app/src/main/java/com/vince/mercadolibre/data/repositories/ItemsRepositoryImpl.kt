@@ -11,16 +11,16 @@ import com.vince.mercadolibre.utils.handleResponse
 
 class ItemsRepositoryImpl(private val itemService: ItemService) : ItemsRepository {
 
-    override suspend fun getItems(query: String): CallResult<ItemsWithPagination<Item>> =
-        itemService.getItems(query).handleResponse {
+    override suspend fun getItems(query: String, limit: Int): CallResult<ItemsWithPagination<Item>> =
+        itemService.getItems(query, limit).handleResponse {
             Log.d("asdf", "$it")
             val items = it.items
             val pagination = it.paging
             ItemsWithPagination(pagination, items)
         }
 
-    override suspend fun getItemsByCategory(categoryId: String): CallResult<ItemsWithPagination<Item>> =
-        itemService.getItemsByCategory(categoryId).handleResponse {
+    override suspend fun getItemsByCategory(categoryId: String, limit: Int): CallResult<ItemsWithPagination<Item>> =
+        itemService.getItemsByCategory(categoryId, limit).handleResponse {
             Log.d("asdf", "$it")
             val items = it.items
             val pagination = it.paging

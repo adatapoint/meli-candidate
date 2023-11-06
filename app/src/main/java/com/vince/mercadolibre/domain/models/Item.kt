@@ -12,7 +12,7 @@ data class Item(
     @SerializedName("currency_id")
     val currency: String,
     @SerializedName("price")
-    val price: String,
+    val price: Int,
     @SerializedName("condition")
     val condition: String
 )
