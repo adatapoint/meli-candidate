@@ -15,4 +15,9 @@ object ConstantsHelper {
 
     // Arguments
     const val ARG_ITEM_ID = "ARG_ITEM_ID"
+    const val ARG_QUERY = "ARG_QUERY"
+    const val ARG_CATEGORY_ID = "ARG_CATEGORY_ID"
+
+    // Exceptions
+    const val INTERFACE_NOT_IMPLEMENTED_EXCEPTION_MESSAGE = "%s should implement %s"
 }

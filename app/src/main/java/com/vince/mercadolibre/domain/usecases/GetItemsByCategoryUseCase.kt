@@ -9,5 +9,5 @@ import com.vince.mercadolibre.utils.ConstantsHelper.ITEMS_TO_REQUEST
 class GetItemsByCategoryUseCase(private val itemsRepository: ItemsRepository) {
 
     suspend operator fun invoke(query: String) : CallResult<ItemsWithPagination<Item>> =
-        itemsRepository.getItems(query, ITEMS_TO_REQUEST)
+        itemsRepository.getItemsByQuery(query, ITEMS_TO_REQUEST)
 }

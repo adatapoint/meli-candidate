@@ -101,7 +101,6 @@ fun DetailedItemScreen(
                 ),
                 text = detailedItem.title
             )
-
             Text(
                 style = TextStyle(
                     fontSize = 16.sp,

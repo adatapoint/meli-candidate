@@ -12,7 +12,7 @@ import com.vince.mercadolibre.utils.handleResponse
 
 class ItemsRepositoryImpl(private val itemService: ItemService) : ItemsRepository {
 
-    override suspend fun getItems(
+    override suspend fun getItemsByQuery(
         query: String,
         limit: Int
     ): CallResult<ItemsWithPagination<Item>> =

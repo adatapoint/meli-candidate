@@ -15,7 +15,7 @@ class ItemViewHolder(private val binding: ElementItemBinding) :
             tvTitle.text = item.title
             tvPrice.text = getFormattedMoneyWithCurrency(item.price, item.currency)
 
-            clItem.setSafeOnClickListener { listener.onClick() }
+            clItem.setSafeOnClickListener { listener.onItemClick(item.id) }
             ivItemPicture.loadImage(item.image)
         }
     }

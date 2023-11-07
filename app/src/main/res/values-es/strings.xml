@@ -3,4 +3,6 @@
     <string name="no_items">Tu búsqueda no arrojó ningún resultado</string>
     <string name="no_items_error">No logramos conectarnos, por favor intenta más tarde</string>
     <string name="condition">Condición</string>
+    <string name="item_no_available">Este artículo no está disponible</string>
+    <string name="search_hint">Busca en Mercado Libre</string>
 </resources>

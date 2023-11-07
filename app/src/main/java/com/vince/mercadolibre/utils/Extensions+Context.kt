@@ -20,3 +20,14 @@ inline fun <reified T : Any> Context.launchActivity(
 }
 
 inline fun <reified T : Any> newIntent(context: Context): Intent = Intent(context, T::class.java)
+
+fun <T> Context.shouldImplement(myInterface: Class<*>): T {
+    if (myInterface.isAssignableFrom(this::class.java)) {
+        return this as T
+    } else {
+        throw InterfaceNotImplementedException(
+            this.javaClass.simpleName,
+            myInterface.simpleName,
+        )
+    }
+}

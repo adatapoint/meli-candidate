@@ -4,4 +4,8 @@
     <string name="no_items">Your search did not retrieve any results</string>
     <string name="no_items_error">No network available, please try again later</string>
     <string name="condition">Condition</string>
+    <string name="item_no_available">This article is not available</string>
+    <string name="search_hint">Search in Mercado Libre</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

@@ -4,19 +4,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".scenes.MainActivity">
+    tools:context=".scenes.items.ItemsActivity">
 
     <androidx.compose.ui.platform.ComposeView
-        android:id="@+id/cvSearchBar"
+        android:id="@+id/cvTopBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/normal_50"
         app:layout_constraintTop_toTopOf="parent" />
 
     <FrameLayout
-        android:id="@+id/flCategoryItems"
+        android:id="@+id/flQueryItems"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/normal_100"
-        app:layout_constraintTop_toBottomOf="@id/cvSearchBar" />
+        app:layout_constraintTop_toBottomOf="@id/cvTopBar" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
