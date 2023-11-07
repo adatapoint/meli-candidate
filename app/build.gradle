@@ -29,14 +29,12 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            buildConfigField("String", "API_SEARCH_SUGGESTIONS_URL", "\"https://http2.mlstatic.com\"")
             buildConfigField("String", "API_URL", "\"https://api.mercadolibre.com\"")
         }
 
         debug {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            buildConfigField("String", "API_SEARCH_SUGGESTIONS_URL", "\"https://http2.mlstatic.com\"")
             buildConfigField("String", "API_URL", "\"https://api.mercadolibre.com\"")
         }
     }
@@ -58,6 +56,7 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.6.2")
     implementation 'com.google.android.material:material:1.10.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
     implementation("androidx.multidex:multidex:2.0.1")
 
     // Network

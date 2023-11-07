@@ -4,11 +4,14 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.vince.mercadolibre.R
 import com.vince.mercadolibre.databinding.ActivityItemsBinding
+import com.vince.mercadolibre.scenes.detaileditem.DetailedItemActivity
 import com.vince.mercadolibre.scenes.ui.components.TopBar
+import com.vince.mercadolibre.utils.ConstantsHelper.ARG_ITEM_ID
 import com.vince.mercadolibre.utils.ConstantsHelper.DEFAULT_CATEGORY
+import com.vince.mercadolibre.utils.launchActivity
 import com.vince.mercadolibre.utils.viewBinding
 
-class ItemsActivity : AppCompatActivity() {
+class ItemsActivity : AppCompatActivity(), ItemsFragment.OnItemClickListener {
 
     private val binding by viewBinding(ActivityItemsBinding::inflate)
 
@@ -29,6 +32,12 @@ class ItemsActivity : AppCompatActivity() {
     private fun setViews() {
         binding.cvTopBar.setContent {
             TopBar(onBackClick = { finish() })
+        }
+    }
+
+    override fun onItemClick(itemId: String) {
+        launchActivity<DetailedItemActivity> {
+            putExtra(ARG_ITEM_ID, itemId)
         }
     }
 }

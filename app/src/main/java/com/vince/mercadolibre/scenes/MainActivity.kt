@@ -13,11 +13,9 @@ import com.vince.mercadolibre.utils.ConstantsHelper.ARG_QUERY
 import com.vince.mercadolibre.utils.ConstantsHelper.DEFAULT_CATEGORY
 import com.vince.mercadolibre.utils.launchActivity
 import com.vince.mercadolibre.utils.viewBinding
-import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : AppCompatActivity(), ItemsFragment.OnItemClickListener {
 
-    private val mainViewModel: MainViewModel by viewModel()
     private val binding by viewBinding(ActivityMainBinding::inflate)
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,12 +37,14 @@ class MainActivity : AppCompatActivity(), ItemsFragment.OnItemClickListener {
     }
 
     private fun setCategoryItemsFragment() {
-        supportFragmentManager.beginTransaction()
-            .add(R.id.flCategoryItems, ItemsFragment.newInstanceByCategory(DEFAULT_CATEGORY))
-            .commit()
+        if (supportFragmentManager.findFragmentById(R.id.flCategoryItems) == null) {
+            supportFragmentManager.beginTransaction()
+                .add(R.id.flCategoryItems, ItemsFragment.newInstanceByCategory(DEFAULT_CATEGORY))
+                .commit()
+        }
     }
 
-    override fun onItemClick(itemId: Int) {
+    override fun onItemClick(itemId: String) {
         launchActivity<DetailedItemActivity> {
             putExtra(ARG_ITEM_ID, itemId)
         }
