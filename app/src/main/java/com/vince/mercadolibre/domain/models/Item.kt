@@ -18,7 +18,30 @@ data class Item(
 )
 
 data class DetailedItem(
+    @SerializedName("id")
     val id: String,
+    @SerializedName("title")
+    val title: String,
+    @SerializedName("pictures")
+    val pictures: List<Picture>,
+    @SerializedName("currency_id")
+    val currency: String,
+    @SerializedName("price")
+    val price: Int,
+    @SerializedName("attributes")
+    val attributes: List<Attribute>,
+    @SerializedName("condition")
+    val condition: String
+)
+
+data class Attribute(
+    @SerializedName("name")
     val name: String,
-    val description: String
+    @SerializedName("value_name")
+    val value: String
+)
+
+data class Picture(
+    @SerializedName("url")
+    val picture: String
 )

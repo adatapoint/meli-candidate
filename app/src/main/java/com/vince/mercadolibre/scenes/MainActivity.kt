@@ -6,7 +6,10 @@ import androidx.appcompat.app.AppCompatActivity
 import com.vince.mercadolibre.R
 import com.vince.mercadolibre.data.CallResult
 import com.vince.mercadolibre.databinding.ActivityMainBinding
+import com.vince.mercadolibre.scenes.detaileditem.DetailedItemActivity
+import com.vince.mercadolibre.utils.ConstantsHelper.ARG_ITEM_ID
 import com.vince.mercadolibre.utils.ConstantsHelper.DEFAULT_CATEGORY
+import com.vince.mercadolibre.utils.launchActivity
 import com.vince.mercadolibre.utils.showToast
 import com.vince.mercadolibre.utils.viewBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -41,6 +44,10 @@ class MainActivity : AppCompatActivity() {
                     // the information is being retrieved
                 }
             }
+        }
+
+        launchActivity<DetailedItemActivity> {
+            putExtra(ARG_ITEM_ID, "MCO1624836818")
         }
     }
 }

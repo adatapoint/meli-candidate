@@ -25,7 +25,7 @@ interface ApiService {
         @Query("limit") limit: Int
     ): Response<ItemsWithPagination<Item>>
 
-    @GET("/items?ids={id}")
-    suspend fun getDetailedItem(@Path("id") id: String): Response<DetailedItem>
+    @GET("/items/{ids}")
+    suspend fun getDetailedItem(@Path("ids") id: String): Response<DetailedItem>
 
 }

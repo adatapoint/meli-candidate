@@ -4,6 +4,7 @@ import com.vince.mercadolibre.data.repositories.ItemsRepositoryImpl
 import com.vince.mercadolibre.data.repositories.SearchRepositoryImpl
 import com.vince.mercadolibre.domain.repositories.ItemsRepository
 import com.vince.mercadolibre.domain.repositories.SearchRepository
+import com.vince.mercadolibre.domain.usecases.GetDetailedItemUseCase
 import com.vince.mercadolibre.domain.usecases.GetItemsByCategoryUseCase
 import com.vince.mercadolibre.domain.usecases.GetItemsUseCase
 import com.vince.mercadolibre.domain.usecases.suggestion.GetSuggestionsQueriesUseCase
@@ -19,4 +20,5 @@ val domainModule = module {
     single { GetItemsUseCase(get()) }
     single { GetItemsByCategoryUseCase(get()) }
     single { GetSuggestionsQueriesUseCase(get()) }
+    single { GetDetailedItemUseCase(get()) }
 }
