@@ -29,6 +29,7 @@ class DetailedItemActivity : AppCompatActivity() {
                     Text(text = "No se pudo obtener la información de este artículo")
                 }
             }
+
         }
     }
 }

@@ -1,7 +1,6 @@
 package com.vince.mercadolibre.scenes.ui.components
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -44,8 +43,8 @@ fun ImageCarousel(
         state = state,
         count = pictures.size,
         modifier = modifier
-            .height(370.dp)
-            .fillMaxWidth(),
+            .fillMaxWidth()
+            .wrapContentHeight(),
     ) { page ->
         imageUrl.value = pictures[page].picture
         Box(
@@ -57,12 +56,7 @@ fun ImageCarousel(
             AsyncImage(
                 modifier = modifier
                     .fillMaxWidth()
-                    .clip(RoundedCornerShape(10.dp))
-                    .border(
-                        width = 1.dp,
-                        color = Color.Black,
-                        shape = RoundedCornerShape(10.dp)
-                    ),
+                    .clip(RoundedCornerShape(10.dp)),
                 contentScale = ContentScale.Fit,
                 model = ImageRequest.Builder(LocalContext.current)
                     .data(imageUrl.value)

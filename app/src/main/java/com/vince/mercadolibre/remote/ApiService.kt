@@ -12,7 +12,6 @@ import retrofit2.http.Query
 @JvmSuppressWildcards
 interface ApiService {
 
-    // TODO
     @GET("/sites/$SITE_ID_COLOMBIA/search")
     suspend fun getItems(
         @Query("q") query: String,
@@ -27,5 +26,4 @@ interface ApiService {
 
     @GET("/items/{ids}")
     suspend fun getDetailedItem(@Path("ids") id: String): Response<DetailedItem>
-
 }

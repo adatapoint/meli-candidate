@@ -9,6 +9,7 @@ import com.vince.mercadolibre.databinding.ActivityMainBinding
 import com.vince.mercadolibre.scenes.detaileditem.DetailedItemActivity
 import com.vince.mercadolibre.utils.ConstantsHelper.ARG_ITEM_ID
 import com.vince.mercadolibre.utils.ConstantsHelper.DEFAULT_CATEGORY
+import com.vince.mercadolibre.utils.ConstantsHelper.LOG_TAG
 import com.vince.mercadolibre.utils.launchActivity
 import com.vince.mercadolibre.utils.showToast
 import com.vince.mercadolibre.utils.viewBinding
@@ -23,20 +24,12 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-//        mainViewModel.getItems("").observe(this) {
-//            Log.d("asdf", "$it")
-//        }
-
-//        mainViewModel.getSuggestionsQueries("ojos").observe(this) {
-//            Log.d("asdf", "$it")
-//        }
-
         mainViewModel.getItemsByCategory(DEFAULT_CATEGORY).observe(this) { result ->
             when (result) {
                 is CallResult.Failure -> showToast(R.string.no_items_error)
                 is CallResult.Success -> {
 
-                    Log.d("asdf", "$result")
+                    Log.d(LOG_TAG, "$result")
                 }
                 is CallResult.Loading -> {
                     // TODO

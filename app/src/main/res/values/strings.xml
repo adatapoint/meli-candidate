@@ -3,4 +3,5 @@
     <string name="money_amount" translatable="false">%s %s</string>
     <string name="no_items">Your search did not retrieve any results</string>
     <string name="no_items_error">No network available, please try again later</string>
+    <string name="condition">Condition</string>
 </resources>

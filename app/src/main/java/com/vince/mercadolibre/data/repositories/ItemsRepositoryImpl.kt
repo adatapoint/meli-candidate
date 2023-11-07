@@ -7,6 +7,7 @@ import com.vince.mercadolibre.domain.models.DetailedItem
 import com.vince.mercadolibre.domain.models.Item
 import com.vince.mercadolibre.domain.models.ItemsWithPagination
 import com.vince.mercadolibre.domain.repositories.ItemsRepository
+import com.vince.mercadolibre.utils.ConstantsHelper.LOG_TAG
 import com.vince.mercadolibre.utils.handleResponse
 
 class ItemsRepositoryImpl(private val itemService: ItemService) : ItemsRepository {
@@ -16,7 +17,7 @@ class ItemsRepositoryImpl(private val itemService: ItemService) : ItemsRepositor
         limit: Int
     ): CallResult<ItemsWithPagination<Item>> =
         itemService.getItems(query, limit).handleResponse {
-            Log.d("asdf", "$it")
+            Log.d(LOG_TAG, "$it")
             val items = it.items
             val pagination = it.paging
             ItemsWithPagination(pagination, items)
@@ -27,7 +28,7 @@ class ItemsRepositoryImpl(private val itemService: ItemService) : ItemsRepositor
         limit: Int
     ): CallResult<ItemsWithPagination<Item>> =
         itemService.getItemsByCategory(categoryId, limit).handleResponse {
-            Log.d("asdf", "$it")
+            Log.d(LOG_TAG, "$it")
             val items = it.items
             val pagination = it.paging
             ItemsWithPagination(pagination, items)

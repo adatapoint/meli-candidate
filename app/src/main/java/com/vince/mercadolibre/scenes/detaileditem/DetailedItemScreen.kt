@@ -2,6 +2,7 @@ package com.vince.mercadolibre.scenes.detaileditem
 
 import android.util.Log
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -26,14 +27,18 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLifecycleOwner
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.vince.mercadolibre.R
 import com.vince.mercadolibre.data.CallResult
 import com.vince.mercadolibre.domain.models.DetailedItem
-import com.vince.mercadolibre.domain.models.Picture
 import com.vince.mercadolibre.scenes.ui.components.ImageCarousel
 import com.vince.mercadolibre.scenes.ui.components.TopBar
 import com.vince.mercadolibre.utils.ConstantsHelper.EMPTY
+import com.vince.mercadolibre.utils.ConstantsHelper.LOG_TAG
 import com.vince.mercadolibre.utils.ConstantsHelper.NO_VALUE
 import org.koin.compose.koinInject
 
@@ -66,7 +71,7 @@ fun DetailedItemScreen(
         Column(
             modifier = Modifier
                 .verticalScroll(rememberScrollState())
-                .background(color = Color(R.color.meli_yellow))
+                .background(color = Color.Yellow)
                 .padding(paddingValues)
                 .padding(8.dp)
                 .padding(bottom = 16.dp)
@@ -78,17 +83,36 @@ fun DetailedItemScreen(
                 modifier = Modifier
                     .clip(RectangleShape)
                     .clip(RoundedCornerShape(10.dp))
+                    .border(
+                        width = 1.dp,
+                        color = Color.Black,
+                        shape = RoundedCornerShape(10.dp)
+                    )
                     .fillMaxSize()
                     .aspectRatio(1f)
             ) {
                 ImageCarousel(pictures = detailedItem.pictures)
-                Log.d("asdf", "${detailedItem.pictures}")
+                Log.d(LOG_TAG, "${detailedItem.pictures}")
             }
-            Text(text = detailedItem.title)
+            Text(
+                style = TextStyle(
+                    fontSize = 20.sp,
+                    fontWeight = FontWeight.Bold
+                ),
+                text = detailedItem.title
+            )
+
+            Text(
+                style = TextStyle(
+                    fontSize = 16.sp,
+                    fontWeight = FontWeight.Bold
+                ),
+                text = "${stringResource(id = R.string.condition)}: ${detailedItem.condition}"
+            )
+
             detailedItem.attributes.forEach { attribute ->
                 Text(text = "${attribute.name}: ${attribute.value}")
             }
-            Text(text = detailedItem.condition)
         }
     }
 }
