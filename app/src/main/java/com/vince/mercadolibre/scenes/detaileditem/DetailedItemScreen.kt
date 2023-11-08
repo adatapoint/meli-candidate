@@ -51,7 +51,6 @@ fun DetailedItemScreen(
     itemId: String,
     onBackAction: () -> Unit
 ) {
-    val coroutineScope = rememberCoroutineScope()
     val context = LocalContext.current
     val lifecycleOwner = LocalLifecycleOwner.current
     val viewModel: DetailedItemViewModel = koinInject()

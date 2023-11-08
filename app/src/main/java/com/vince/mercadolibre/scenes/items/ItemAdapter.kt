@@ -30,9 +30,6 @@ class ItemAdapter(private val listener: ItemListener) :
         }
     }
 
-    fun hasItems(): Boolean = elements.size > 0
-
-
     fun setFirstPageElements(elements: List<Item>) {
         replaceAllItems(elements)
     }
