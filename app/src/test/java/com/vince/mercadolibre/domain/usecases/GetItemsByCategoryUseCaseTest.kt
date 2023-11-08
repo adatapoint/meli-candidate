@@ -20,7 +20,6 @@ class GetItemsByCategoryUseCaseTest : MockableInit {
     @MockK
     lateinit var itemRepository: ItemRepository
 
-    private val itemsToRequest = ITEMS_TO_REQUEST
     private val category = "MCO2344"
 
     private val itemsWithPaginationResult = ItemsWithPagination(
@@ -31,17 +30,17 @@ class GetItemsByCategoryUseCaseTest : MockableInit {
     @Test
     fun `When useCase is invoked then it returns an ItemsWithPagination with values`() {
         coEvery {
-            itemRepository.getItemsByCategory(category, itemsToRequest)
+            itemRepository.getItemsByCategory(category, ITEMS_TO_REQUEST)
         } returns CallResult.success(itemsWithPaginationResult)
 
-        val useCase = GetItemsByQueryUseCase(itemRepository)
+        val useCase = GetItemsByCategoryUseCase(itemRepository)
 
         val result = runBlocking { useCase(category) }
 
         result shouldBeEqualTo CallResult.success(itemsWithPaginationResult)
 
         coVerify {
-            itemRepository.getItemsByCategory(category, itemsToRequest)
+            itemRepository.getItemsByCategory(category, ITEMS_TO_REQUEST)
         }
     }
 }

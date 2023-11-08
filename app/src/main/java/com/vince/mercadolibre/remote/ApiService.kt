@@ -13,7 +13,7 @@ import retrofit2.http.Query
 interface ApiService {
 
     @GET("/sites/$SITE_ID_COLOMBIA/search")
-    suspend fun getItems(
+    suspend fun getItemsByQuery(
         @Query("q") query: String,
         @Query("limit") limit: Int
     ): Response<ItemsWithPagination<Item>>
