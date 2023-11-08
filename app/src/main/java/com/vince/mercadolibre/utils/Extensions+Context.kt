@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.annotation.StringRes
+import com.vince.mercadolibre.R
 
 fun Context.showToast(@StringRes message: Int, length: Int = Toast.LENGTH_LONG) {
     Toast.makeText(this, message, length).show()
@@ -18,6 +19,15 @@ inline fun <reified T : Any> Context.launchActivity(
     intent.init()
     startActivity(intent, options)
 }
+
+fun Context.getFormattedMoneyWithCurrency(
+    moneyAmount: Int,
+    currency: String
+): String = String.format(
+    getString(R.string.money_amount),
+    getFormattedMoney(moneyAmount.toBigDecimal()),
+    currency,
+)
 
 inline fun <reified T : Any> newIntent(context: Context): Intent = Intent(context, T::class.java)
 

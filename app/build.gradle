@@ -83,7 +83,13 @@ dependencies {
     implementation("com.google.accompanist:accompanist-pager:0.27.1")
     implementation "com.google.accompanist:accompanist-systemuicontroller:0.28.0"
 
-    testImplementation 'junit:junit:4.13.2'
+    // Testing
+    testImplementation("junit:junit:4.13.2")
+    testImplementation("org.amshove.kluent:kluent:1.72")
+    testImplementation("io.mockk:mockk:1.13.3")
+    testImplementation("androidx.arch.core:core-testing:2.2.0")
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.3")
+
     debugImplementation 'androidx.compose.ui:ui-tooling'
     debugImplementation 'androidx.compose.ui:ui-test-manifest'
     androidTestImplementation 'androidx.compose.ui:ui-test-junit4'

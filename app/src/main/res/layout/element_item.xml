@@ -30,6 +30,8 @@
             android:id="@+id/tvTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:maxLines="2"
+            android:ellipsize="end"
             tools:text="Celular Pocophone muy bueno" />
 
         <TextView

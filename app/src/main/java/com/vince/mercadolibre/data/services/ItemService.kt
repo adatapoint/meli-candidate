@@ -8,7 +8,7 @@ import retrofit2.Response
 
 class ItemService(private val apiService: ApiService) {
 
-    suspend fun getItems(query: String, limit: Int): Response<ItemsWithPagination<Item>> =
+    suspend fun getItemsByQuery(query: String, limit: Int): Response<ItemsWithPagination<Item>> =
         apiService.getItems(query, limit)
 
     suspend fun getItemsByCategory(categoryId: String, limit: Int): Response<ItemsWithPagination<Item>> =

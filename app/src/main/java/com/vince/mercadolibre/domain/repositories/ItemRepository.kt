@@ -5,7 +5,7 @@ import com.vince.mercadolibre.domain.models.DetailedItem
 import com.vince.mercadolibre.domain.models.Item
 import com.vince.mercadolibre.domain.models.ItemsWithPagination
 
-interface ItemsRepository {
+interface ItemRepository {
 
     suspend fun getItemsByQuery(query: String, limit: Int): CallResult<ItemsWithPagination<Item>>
 

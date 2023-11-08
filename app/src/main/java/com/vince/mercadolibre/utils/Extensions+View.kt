@@ -4,17 +4,12 @@ import android.view.View
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import coil.load
-import com.vince.mercadolibre.R
 import com.vince.mercadolibre.utils.views.SafeClickListener
 
 fun ViewHolder.getFormattedMoneyWithCurrency(
     moneyAmount: Int,
     currency: String
-): String = String.format(
-    itemView.context.getString(R.string.money_amount),
-    getFormattedMoney(moneyAmount.toBigDecimal()),
-    currency,
-)
+): String = itemView.context.getFormattedMoneyWithCurrency(moneyAmount, currency)
 
 fun View.setSafeOnClickListener(onSafeClick: (View) -> Unit) {
     val safeClickListener = SafeClickListener(onSafeClick)
@@ -31,4 +26,12 @@ fun ImageView.loadImage(
             error(it)
         }
     }
+}
+
+fun View.setAsVisible() {
+    this.visibility = View.VISIBLE
+}
+
+fun View.setAsGone() {
+    this.visibility = View.GONE
 }

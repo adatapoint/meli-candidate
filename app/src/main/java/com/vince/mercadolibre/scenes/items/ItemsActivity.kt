@@ -7,7 +7,8 @@ import com.vince.mercadolibre.databinding.ActivityItemsBinding
 import com.vince.mercadolibre.scenes.detaileditem.DetailedItemActivity
 import com.vince.mercadolibre.scenes.ui.components.TopBar
 import com.vince.mercadolibre.utils.ConstantsHelper.ARG_ITEM_ID
-import com.vince.mercadolibre.utils.ConstantsHelper.DEFAULT_CATEGORY
+import com.vince.mercadolibre.utils.ConstantsHelper.ARG_QUERY
+import com.vince.mercadolibre.utils.ConstantsHelper.EMPTY
 import com.vince.mercadolibre.utils.launchActivity
 import com.vince.mercadolibre.utils.viewBinding
 
@@ -24,9 +25,12 @@ class ItemsActivity : AppCompatActivity(), ItemsFragment.OnItemClickListener {
     }
 
     private fun setQueryItemsFragment() {
-        supportFragmentManager.beginTransaction()
-            .add(R.id.flQueryItems, ItemsFragment.newInstanceByCategory(DEFAULT_CATEGORY))
-            .commit()
+        val query = intent.getStringExtra(ARG_QUERY) ?: EMPTY
+        if (supportFragmentManager.findFragmentById(R.id.flQueryItems) == null) {
+            supportFragmentManager.beginTransaction()
+                .add(R.id.flQueryItems, ItemsFragment.newInstanceByQuery(query))
+                .commit()
+        }
     }
 
     private fun setViews() {

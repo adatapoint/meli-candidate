@@ -2,7 +2,6 @@ package com.vince.mercadolibre.scenes.items
 
 import android.content.Context
 import android.os.Bundle
-import android.os.Parcelable
 import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
@@ -10,12 +9,15 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.vince.mercadolibre.R
 import com.vince.mercadolibre.data.CallResult
 import com.vince.mercadolibre.databinding.FragmentItemsBinding
+import com.vince.mercadolibre.domain.models.Item
+import com.vince.mercadolibre.utils.ConstantsHelper
 import com.vince.mercadolibre.utils.ConstantsHelper.ARG_CATEGORY_ID
 import com.vince.mercadolibre.utils.ConstantsHelper.ARG_QUERY
-import com.vince.mercadolibre.utils.ConstantsHelper.ARG_RECYCLERVIEW_LAYOUT
-import com.vince.mercadolibre.utils.ConstantsHelper.DEFAULT_CATEGORY
-import com.vince.mercadolibre.utils.ConstantsHelper.EMPTY
 import com.vince.mercadolibre.utils.ConstantsHelper.LOG_TAG
+import com.vince.mercadolibre.utils.InternetDelegate
+import com.vince.mercadolibre.utils.setAsGone
+import com.vince.mercadolibre.utils.setAsVisible
+import com.vince.mercadolibre.utils.setSafeOnClickListener
 import com.vince.mercadolibre.utils.shouldImplement
 import com.vince.mercadolibre.utils.showToast
 import com.vince.mercadolibre.utils.viewBinding
@@ -25,8 +27,8 @@ class ItemsFragment : Fragment(R.layout.fragment_items), ItemListener {
 
     private val itemsViewModel: ItemsViewModel by viewModel()
     private val binding by viewBinding(FragmentItemsBinding::bind)
+    private lateinit var internetDelegate: InternetDelegate
     private var listener: OnItemClickListener? = null
-    private var savedRecyclerLayoutState: Parcelable? = null
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -36,42 +38,51 @@ class ItemsFragment : Fragment(R.layout.fragment_items), ItemListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setRecyclerView(savedInstanceState)
+        internetDelegate = InternetDelegate(requireContext())
+        setViews()
+        setRecyclerView()
+        getItems()
+    }
 
-        if (requireArguments().containsKey(ARG_QUERY)) {
-            getItemsByQuery(requireArguments().getString(ARG_QUERY) ?: EMPTY)
+    private fun getItems() {
+        if (internetDelegate.hasInternet()) {
+            binding.llNoNetwork.setAsGone()
+            if (requireArguments().containsKey(ARG_QUERY)) {
+                val query = requireArguments().getString(ARG_QUERY) ?: ConstantsHelper.EMPTY
+                getItemsByQuery(query)
+                setQueryTitle(query)
+            } else {
+                getItemsByCategory(requireArguments().getString(ARG_CATEGORY_ID) ?: ConstantsHelper.DEFAULT_CATEGORY)
+                setCategoryTitle()
+            }
         } else {
-            getItemsByCategory(requireArguments().getString(ARG_CATEGORY_ID) ?: DEFAULT_CATEGORY)
-        }
-
-        savedRecyclerLayoutState?.let {
-            binding.rvItems.layoutManager?.onRestoreInstanceState(it)
+            binding.llNoNetwork.setAsVisible()
         }
     }
 
-    override fun onResume() {
-        super.onResume()
-        // Restaura la posición del RecyclerView si está guardada
-        if (savedRecyclerLayoutState != null) {
-            binding.rvItems.layoutManager?.onRestoreInstanceState(savedRecyclerLayoutState)
+    private fun setViews() {
+        binding.btnTryAgain.setSafeOnClickListener {
+            getItems()
         }
     }
 
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-        // Guarda la posición actual del RecyclerView
-        savedRecyclerLayoutState = binding.rvItems.layoutManager?.onSaveInstanceState()
-        outState.putParcelable(ARG_RECYCLERVIEW_LAYOUT, savedRecyclerLayoutState)
+    private fun setCategoryTitle() {
+        binding.run {
+            tvTitleQuery.text = getString(R.string.interesting_items)
+        }
     }
 
-    private fun setRecyclerView(savedInstanceState: Bundle?) {
+    private fun setQueryTitle(query: String) {
+        binding.run {
+            tvTitleQuery.text =  String.format(getString(R.string.search_results), query)
+        }
+    }
+
+    private fun setRecyclerView() {
         binding.rvItems.apply {
             adapter = ItemAdapter(this@ItemsFragment)
             layoutManager = LinearLayoutManager(context)
             setHasFixedSize(true)
-        }
-        if (savedInstanceState != null) {
-            savedRecyclerLayoutState = savedInstanceState.getBundle("recycler_layout")
         }
     }
 
@@ -86,18 +97,32 @@ class ItemsFragment : Fragment(R.layout.fragment_items), ItemListener {
                 }
                 is CallResult.Success -> {
                     Log.d(LOG_TAG, "$result")
-                    (binding.rvItems.adapter as ItemAdapter).setFirstPageElements(result.data.items)
+                    setItemsInAdapter(result.data.items)
                 }
             }
+        }
+    }
+
+    private fun setItemsInAdapter(items: List<Item>) {
+        (binding.rvItems.adapter as ItemAdapter).setFirstPageElements(items)
+        if (items.isEmpty()) {
+            binding.tvEmptyState.setAsVisible()
         }
     }
 
     private fun getItemsByQuery(query: String) {
         itemsViewModel.getItemsByQuery(query).observe(this) { result ->
             when (result) {
-                is CallResult.Failure -> {}
-                is CallResult.Loading -> {}
-                is CallResult.Success -> {}
+                is CallResult.Failure -> showToast(R.string.no_items_error)
+                is CallResult.Loading -> {
+                    // TODO
+                    // this state allows me to show that
+                    // the information is being retrieved
+                }
+                is CallResult.Success -> {
+                    Log.d(LOG_TAG, "$result")
+                    setItemsInAdapter(result.data.items)
+                }
             }
         }
     }

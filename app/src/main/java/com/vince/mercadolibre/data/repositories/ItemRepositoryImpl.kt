@@ -6,17 +6,17 @@ import com.vince.mercadolibre.data.services.ItemService
 import com.vince.mercadolibre.domain.models.DetailedItem
 import com.vince.mercadolibre.domain.models.Item
 import com.vince.mercadolibre.domain.models.ItemsWithPagination
-import com.vince.mercadolibre.domain.repositories.ItemsRepository
+import com.vince.mercadolibre.domain.repositories.ItemRepository
 import com.vince.mercadolibre.utils.ConstantsHelper.LOG_TAG
 import com.vince.mercadolibre.utils.handleResponse
 
-class ItemsRepositoryImpl(private val itemService: ItemService) : ItemsRepository {
+class ItemRepositoryImpl(private val itemService: ItemService) : ItemRepository {
 
     override suspend fun getItemsByQuery(
         query: String,
         limit: Int
     ): CallResult<ItemsWithPagination<Item>> =
-        itemService.getItems(query, limit).handleResponse {
+        itemService.getItemsByQuery(query, limit).handleResponse {
             Log.d(LOG_TAG, "$it")
             val items = it.items
             val pagination = it.paging

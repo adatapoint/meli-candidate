@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="no_items">Tu búsqueda no arrojó ningún resultado</string>
+    <string name="no_items">Parece que no hay ningún artículo por aquí</string>
     <string name="no_items_error">No logramos conectarnos, por favor intenta más tarde</string>
     <string name="condition">Condición</string>
+    <string name="no_network">Parece que no hay conexión</string>
+    <string name="try_again">Intentar de nuevo</string>
+    <string name="search_results">Resultados para: %s</string>
     <string name="item_no_available">Este artículo no está disponible</string>
     <string name="search_hint">Busca en Mercado Libre</string>
+    <string name="interesting_items">¡Aquí puedes ver algunos artículos interesantes!</string>
 </resources>
